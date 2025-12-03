@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- SEO & Metadata -->
+    <title>الباب الثالث: في المياه - Fiqh of Water | Artgroup & Ahmad Zaelai</title>
+    <meta name="description" content="Presentasi interaktif Fiqh Thaharah (Bab Air) dengan visualisasi modern. Sebuah kolaborasi antara Artgroup dan Ahmad Zaelai untuk pembelajaran Fiqh yang estetis.">
+    <meta name="keywords" content="Fiqh, Thaharah, Air, Islam, Hukum Air, Artgroup, Ahmad Zaelai, Fiqh Visual">
+    <meta name="author" content="Artgroup x Ahmad Zaelai">
+    <meta name="theme-color" content="#0c4a6e"> 
+    
+    <!-- Open Graph / Facebook / WhatsApp -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://artgroup.dev/">
+    <meta property="og:title" content="فقه الطهارة: المياه - Visual Fiqh Presentation">
+    <meta property="og:description" content="Pelajari hukum-hukum air dalam Fiqh Thaharah dengan tampilan visual modern yang menenangkan.">
+    <meta property="og:image" content="https://images.unsplash.com/photo-1468581264429-2548ef9eb732?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="فقه الطهارة: المياه - Fiqh of Water">
+    <meta property="twitter:description" content="Presentasi interaktif Fiqh Thaharah (Bab Air) dengan visualisasi modern.">
+    <meta property="twitter:image" content="https://images.unsplash.com/photo-1468581264429-2548ef9eb732?auto=format&fit=crop&w=1200&q=80">
+
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💧</text></svg>">
+    
+    <!-- Performance: Preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://images.unsplash.com">
+    <link rel="preconnect" href="https://cdn.tailwindcss.com">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@300;400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & Lenis -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js" defer></script>
+
+    <style>
+        /* Reset margins */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        body {
+            font-family: 'Noto Naskh Arabic', serif;
+            background-color: #f0f9ff;
+            overflow-x: hidden;
+        }
+
+        /* Hide Scrollbar */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+        html {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Typography Utilities */
+        .font-kufi { font-family: 'Noto Kufi Arabic', sans-serif; }
+        .font-montserrat { font-family: 'Montserrat', sans-serif; }
+        .text-shadow { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.1);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            will-change: transform; 
+        }
+        
+        .glass-card:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Liquid Glass Elements */
+        .liquid-glass {
+            position: absolute;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.005));
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.05);
+            border-radius: 50%;
+            z-index: 1;
+            pointer-events: none;
+        }
+        
+        .shape-blob {
+            border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+        }
+
+        .reveal-item { visibility: hidden; }
+        
+        /* Animations */
+        @keyframes float {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(10px, -20px) rotate(5deg); }
+            66% { transform: translate(-10px, 20px) rotate(-5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
+        }
+        .animate-float { animation: float 10s ease-in-out infinite; }
+        .animate-float-slow { animation: float 15s ease-in-out infinite reverse; }
+        
+        @keyframes shimmer {
+            0% { transform: translateX(-150%) skewX(-12deg); }
+            100% { transform: translateX(150%) skewX(-12deg); }
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+        
+        .modal-content {
+            transform: translateY(30px);
+            transition: transform 0.3s ease;
+            will-change: transform;
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="text-gray-800 antialiased selection:bg-sky-200 selection:text-sky-900">
+
+    <!-- Brand Title -->
+    <div id="brand-logo" class="fixed top-6 left-8 z-50 text-white font-bold text-xl font-montserrat tracking-[0.3em] transition-opacity duration-500 drop-shadow-[0_2px_8px_rgba(255,255,255,0.25)] cursor-pointer select-none hover:opacity-80" aria-label="Toggle Logo">
+        artgroup
+    </div>
+
+    <!-- Page 1: Hero Section -->
+    <section id="section-opening" class="relative w-full h-screen min-h-[600px] flex items-center justify-center mb-4 overflow-hidden section-panel">
+        <div class="absolute inset-0 w-full h-full parallax-bg">
+            <img src="https://images.unsplash.com/photo-1468581264429-2548ef9eb732?auto=format&fit=crop&w=1920&q=80" 
+                 alt="Deep Dark Ocean" 
+                 class="w-full h-full object-cover scale-110"
+                 fetchpriority="high">
+            <div class="absolute inset-0 bg-black/40"></div>
+        </div>
+
+        <div class="liquid-glass shape-blob w-64 h-64 md:w-96 md:h-96 top-[15%] left-[5%] opacity-20 hero-element animate-float"></div>
+        <div class="liquid-glass shape-blob w-48 h-48 md:w-72 md:h-72 bottom-[20%] right-[10%] opacity-10 hero-element animate-float-slow" style="animation-delay: -2s;"></div>
+        <div class="liquid-glass w-24 h-24 top-[40%] right-[25%] rounded-full opacity-5 blur-sm hero-element animate-float"></div>
+
+        <div class="relative z-10 text-center text-white px-4">
+            <h1 class="hero-text text-6xl md:text-8xl font-bold mb-4 text-shadow font-kufi tracking-wide translate-y-20 opacity-0">فقه الطهارة</h1>
+            <h2 class="hero-text text-3xl md:text-5xl font-light text-shadow font-kufi mt-4 opacity-0 translate-y-10">الباب الثالث: في المياه</h2>
+            <div class="hero-divider w-24 h-1 bg-white mx-auto mt-8 rounded-full shadow-[0_0_15px_rgba(255,255,255,0.5)] scale-x-0"></div>
+        </div>
+    </section>
+
+    <!-- Page 2: Introduction -->
+    <section id="section-intro" class="relative w-full h-screen flex flex-col items-center justify-center bg-white mb-4 section-panel">
+        <div class="flex flex-col items-center reveal-group">
+            <div class="w-48 h-48 md:w-64 md:h-64 rounded-full overflow-hidden shadow-2xl mb-8 border-4 border-slate-100 ring-1 ring-slate-200 reveal-child hover:scale-105 transition-transform duration-700">
+                 <img src="https://images.unsplash.com/photo-1500375592092-40eb2168fd21?auto=format&fit=crop&w=800&q=80" 
+                     alt="Profile Picture of Ahmad Zaelai" 
+                     class="w-full h-full object-cover"
+                     loading="lazy" decoding="async">
+            </div>
+            
+            <div class="text-center space-y-4">
+                <h2 class="text-4xl md:text-6xl font-bold font-kufi text-slate-800 tracking-wide drop-shadow-sm reveal-child">أحمد زيلعي</h2>
+                <p class="text-xl md:text-2xl text-gray-500 font-montserrat tracking-[0.2em] font-light dir-ltr reveal-child">2025.03.3927</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 3: Sea Water Ruling -->
+    <section class="relative w-full min-h-screen flex items-center justify-center py-10 mb-4 bg-sky-50 section-panel">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-10 reveal-group">
+            <div class="w-full md:w-1/2 h-[550px] rounded-3xl overflow-hidden shadow-2xl relative group bg-white reveal-child glass-card p-0">
+                <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1000&q=80" 
+                     alt="Sea Water Illustration" 
+                     class="w-full h-full object-cover transition duration-1000 ease-out group-hover:scale-110"
+                     loading="lazy" decoding="async">
+            </div>
+            
+            <div class="w-full md:w-1/2 p-4 md:p-8">
+                <h3 class="text-3xl font-bold text-sky-800 mb-8 font-kufi border-r-8 border-sky-500 pr-4 reveal-child">
+                    ٣٠ - حكم التطهر بماء البحر
+                </h3>
+                
+                <div class="space-y-6">
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl border border-sky-100 reveal-child glass-card">
+                        <strong class="text-sky-700 block text-2xl mb-4 border-b pb-2 font-kufi">الأقوال ونسبتها:</strong>
+                        <div class="space-y-3 text-lg font-medium text-gray-700">
+                            <p>1. يجوز التطهر بماء البحر <span class="text-gray-500 font-normal">(جمهور العلماء)</span>.</p>
+                            <p>2. لا يجوز (يكره) التطهر بماء البحر <span class="text-gray-500 font-normal">(بعض الصحابة كابن عمر وعمرو بن العاص رضي الله عنهم)</span>.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl border border-sky-100 reveal-child glass-card">
+                        <strong class="text-sky-700 block text-2xl mb-4 border-b pb-2 font-kufi">الدليل:</strong>
+                        <ul class="list-none space-y-3 text-lg font-medium text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-sky-500 ml-2">✦</span>
+                                حديث أبي هريرة (هو الطهور ماؤه الحل ميتته).
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-sky-500 ml-2">✦</span>
+                                قال ابن عمر وعمرو بن العاص (التيمم أعجب إلينا من ماء البحر).
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 4: Essence of Issue 1 (Khulasah Sea Water) -->
+    <section class="relative w-full min-h-screen flex items-center justify-center py-10 mb-4 bg-white section-panel">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row-reverse items-center gap-10 reveal-group">
+            <div class="w-full md:w-1/2 h-[450px] rounded-3xl overflow-hidden shadow-2xl relative group bg-gray-100 reveal-child glass-card p-0">
+                <img src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?auto=format&fit=crop&w=1000&q=80" 
+                     alt="Sea Waves Texture" 
+                     class="w-full h-full object-cover transition duration-1000 ease-out group-hover:scale-110"
+                     loading="lazy" decoding="async">
+            </div>
+            
+            <div class="w-full md:w-1/2 p-10 bg-white rounded-3xl shadow-xl border border-gray-100 reveal-child glass-card">
+                <h3 class="text-3xl font-bold text-sky-800 mb-6 font-kufi border-b-2 border-sky-200 pb-4">خلاصة مسألة</h3>
+                <p class="text-xl leading-loose font-medium text-gray-700 text-justify">
+                    خلاصة مسألة : أن الخلاف وقع فيها بين الجمهور القائلين بجوازه وبعض الصحابة الذين كرهوه وفضلوا التيمم عليه؛ لتردده بين كونه ماءً مطلقاً أو له حكم خاص، والراجح هو مذهب الجمهور بصحة الوضوء والغسل به؛ للنص النبوي الصريح القاطع للنزاع: «هُوَ الطَّهُورُ مَاؤُهُ، الْحِلُّ مَيْتَتُهُ»، مما يثبت أنه ماء طهور يرفع الحدث ويزيل الخبث.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 5: Small Amount of Water Ruling -->
+    <section class="relative w-full min-h-screen flex items-center justify-center py-2 md:py-4 mb-4 bg-sky-50 section-panel">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-4 md:gap-8 h-full reveal-group">
+            <!-- Image Card -->
+            <div class="w-full md:w-1/2 h-[400px] md:h-[550px] rounded-3xl overflow-hidden shadow-2xl relative bg-white reveal-child glass-card p-0 order-2 md:order-1">
+                 <img src="https://images.unsplash.com/photo-1548839140-29a749e1cf4d?auto=format&fit=crop&w=800&q=80" 
+                      alt="Water Splash Close Up" 
+                      class="w-full h-full object-cover"
+                      loading="lazy" decoding="async">
+            </div>
+
+            <!-- Text Content -->
+            <div class="w-full md:w-1/2 p-2 md:p-4 flex flex-col justify-center order-1 md:order-2">
+                <h3 class="text-xl md:text-3xl font-bold text-sky-900 mb-4 font-kufi leading-tight border-r-8 border-sky-500 pr-4 reveal-child">
+                    ٣١ - حكم الماء القليل إذا خالطته نجاسة ولم يتغير أحد أوصافه
+                </h3>
+                
+                <div class="space-y-3 md:space-y-4">
+                    <div class="bg-white p-4 rounded-2xl shadow-lg hover:shadow-xl border border-sky-100 reveal-child glass-card">
+                        <strong class="text-sky-700 block text-lg md:text-xl mb-2 border-b pb-1 font-kufi">الأقوال ونسبتها:</strong>
+                        <div class="space-y-2 text-base md:text-lg font-medium text-gray-700 leading-snug">
+                            <p>1. الماء طاهر سواء كان كثيرا أو قليلا <span class="text-gray-500 font-normal text-sm md:text-base">(مالك (مشهور))</span>.</p>
+                            <p>2. إن كان الماء قليلا ينجس و إن كان كثيرا لم ينجس <span class="text-gray-500 font-normal text-sm md:text-base">(أبو حنيفة / الشافعي / أحمد)</span>.</p>
+                            <p>3. الماء طاهر لكن يكره استعماله مع وجود غيره <span class="text-gray-500 font-normal text-sm md:text-base">(مالك (رواية) / أهل الظاهر)</span>.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white p-4 rounded-2xl shadow-lg hover:shadow-xl border border-sky-100 reveal-child glass-card">
+                        <strong class="text-sky-700 block text-lg md:text-xl mb-2 border-b pb-1 font-kufi">الدليل:</strong>
+                        <ul class="list-none space-y-2 text-base md:text-lg font-medium text-gray-700 leading-snug">
+                            <li class="flex items-start">
+                                <span class="text-sky-500 ml-2 mt-1">✦</span>
+                                <span>حديث أنس (أن أعرابيا بال في طائفة المسجد...) ظاهره أن قليل النجاسة لا يفسد قليل الماء.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-sky-500 ml-2 mt-1">✦</span>
+                                <span>حديث أبي سعيد الخدري (الماء طهور لا ينجسه شيء) يدل على الماء الكثير.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-sky-500 ml-2 mt-1">✦</span>
+                                <span>حديث أبي هريرة (لا يبولن احدكم...) يحمل على الكراهة.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 6: Essence of Issue 2 (Khulasah Small Water) -->
+    <section class="relative w-full min-h-screen flex items-center justify-center py-10 mb-4 bg-white section-panel">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row-reverse items-center gap-10 reveal-group">
+             <div class="w-full md:w-1/2 h-[450px] rounded-3xl overflow-hidden shadow-2xl relative group bg-blue-50 reveal-child glass-card p-0">
+                <img src="https://images.unsplash.com/photo-1527066236128-2ff79f7b9705?auto=format&fit=crop&w=1000&q=80" 
+                     alt="Pure Water Bottle Concept" 
+                     class="w-full h-full object-cover transition duration-1000 ease-out group-hover:scale-110"
+                     loading="lazy" decoding="async">
+             </div>
+
+             <div class="w-full md:w-1/2 p-10 bg-white rounded-3xl shadow-lg border border-indigo-100 reveal-child glass-card">
+                <h3 class="text-3xl font-bold mb-6 font-kufi text-indigo-800 border-b-2 border-indigo-200 pb-4">خلاصة المسألة</h3>
+                <p class="text-xl leading-loose font-medium text-gray-700 text-justify">
+                    خلاصة المسألة هي تعارض ظواهر الأحاديث الواردة في المياه؛ وبناءً على قول جمهور الأئمة (أبو حنيفة والشافعي وأحمد) وتغليباً لجانب الاحتياط، فإن الماء القليل ينجس بمجرد ملاقاة النجاسة له وإن لم يتغير أحد أوصافه.
+                </p>
+             </div>
+        </div>
+    </section>
+
+    <!-- Page 7: Used Water Ruling -->
+    <section class="relative w-full min-h-screen flex items-center justify-center py-2 md:py-4 mb-4 bg-teal-50 section-panel">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center gap-4 md:gap-8 h-full reveal-group">
+            <div class="w-full md:w-1/2 h-[400px] md:h-[550px] rounded-t-full rounded-b-3xl overflow-hidden shadow-2xl border-4 border-white bg-white reveal-child glass-card p-0 order-2 md:order-1">
+                <img src="https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?auto=format&fit=crop&w=1000&q=80" 
+                     alt="Pool Water Surface" 
+                     class="w-full h-full object-cover"
+                     loading="lazy" decoding="async">
+            </div>
+
+            <div class="w-full md:w-1/2 p-2 md:p-4 flex flex-col justify-center order-1 md:order-2">
+                <h3 class="text-xl md:text-3xl font-bold text-teal-800 mb-4 font-kufi border-r-8 border-teal-500 pr-4 reveal-child">
+                    ٣٤ - حكم التطهر بالماء المستعمل في طهارة
+                </h3>
+
+                <div class="space-y-3 md:space-y-4">
+                    <div class="bg-white p-4 rounded-2xl shadow-lg hover:shadow-xl border reveal-child glass-card">
+                        <strong class="text-teal-700 block text-lg md:text-xl mb-2 border-b pb-1 font-kufi">الأقوال ونسبتها:</strong>
+                        <div class="space-y-2 text-base md:text-lg font-medium text-gray-700 leading-snug">
+                            <p>1. لا يجوز الطهارة به بحال <span class="text-gray-500 font-normal text-sm md:text-base">(أبو حنيفة / الشافعي / أحمد)</span>.</p>
+                            <p>2. يكره الطهارة به ولا يجوز التيمم مع وجوده <span class="text-gray-500 font-normal text-sm md:text-base">(مالك)</span>.</p>
+                            <p>3. يجوز التطهر به ولا فرق بينه وبين الماء المطلق <span class="text-gray-500 font-normal text-sm md:text-base">(أبو ثور / داود وأصحابه)</span>.</p>
+                            <p>4. الماء نجس <span class="text-gray-500 font-normal text-sm md:text-base">(أبو يوسف)</span>.</p>
+                        </div>
+                    </div>
+
+                    <div class="bg-white p-4 rounded-2xl shadow-lg hover:shadow-xl border reveal-child glass-card">
+                        <strong class="text-teal-700 block text-lg md:text-xl mb-2 border-b pb-1 font-kufi">الأدلة:</strong>
+                        <ul class="list-none space-y-2 text-base md:text-lg font-medium text-gray-700 leading-snug">
+                            <li class="flex items-start">
+                                <span class="text-teal-500 ml-2 mt-1">✦</span>
+                                <span>حديث أبي هريرة رضي الله عنه: (لا يغتسل أحدكم في الماء الدائم، وهو جنب) [م]، النهي في الحديث لئلا يصير الماء مستعملا.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-teal-500 ml-2 mt-1">✦</span>
+                                <span>لأن الماء المستعمل في طهارة تعافه النفوس.</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-teal-500 ml-2 mt-1">✦</span>
+                                <span>ثبت أن الصحابة رضي الله عنهم كانوا يقتتلون على فضل وضوئه صلى الله عليه وسلم من حديث أبي جحيفة رضي الله عنه: (فجعل الناس يأخذون من فضل وضوئه يتمسحون به)</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-teal-500 ml-2 mt-1">✦</span>
+                                <span>الوضوء يسمى طهارة، والطهارة لا تكون إلا عن نجاسة إذ تطهير الطاهر لا يعقل.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 8: Essence of Issue 3 (Khulasah Used Water) -->
+    <section class="relative w-full min-h-screen flex items-center justify-center py-10 mb-4 bg-gray-50 section-panel">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row-reverse items-center gap-10 reveal-group">
+            <div class="w-full md:w-1/2 h-[450px] rounded-3xl overflow-hidden shadow-2xl relative group bg-white reveal-child glass-card p-0">
+                 <img src="https://images.unsplash.com/photo-1564751531853-4eace2746ae9?auto=format&fit=crop&w=1000&q=80" 
+                      alt="Blue Water Pool" 
+                      class="w-full h-full object-cover"
+                      loading="lazy" decoding="async">
+            </div>
+
+            <div class="w-full md:w-1/2 p-10 bg-white rounded-3xl shadow-xl border border-gray-100 reveal-child glass-card">
+                <h3 class="text-3xl font-bold mb-6 font-kufi text-teal-600 border-b-2 border-teal-200 pb-4">خلاصة المسألة</h3>
+                <p class="text-xl leading-loose font-medium text-gray-700 text-justify">
+                    خلاصة المسألة في حكم التطهر بالماء المستعمل تعود إلى سبب الخلاف وهو: "هل يتناوله اسم الماء المطلق بعد الاستعمال؟"، والقول الراجح هو جواز التطهر به؛ لكونه ماءً طاهراً مطهراً باقياً على إطلاقه ما لم تتغير أحد أوصافه الثلاثة، ولثبوت فعل الصحابة رضي الله عنهم في استخدام فضل وضوء النبي ﷺ، وذلك هو مذهب أبي ثور وداود، وهو الأقوى دليلاً.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page 9: Ending -->
+    <section id="section-ending" class="relative w-full h-screen flex flex-col items-center justify-center overflow-hidden section-panel">
+        <div class="absolute inset-0 parallax-bg">
+            <img src="https://images.unsplash.com/photo-1559128010-7c1ad6e1b6a5?auto=format&fit=crop&w=1920&q=80" 
+                 alt="Island Aerial View Ending" 
+                 class="w-full h-full object-cover scale-110"
+                 loading="lazy" decoding="async">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-black/60"></div>
+        </div>
+
+        <div class="liquid-glass w-32 h-32 top-1/4 left-10 md:left-1/4 opacity-30 z-10 animate-float ending-element"></div>
+        <div class="liquid-glass w-48 h-48 bottom-1/4 right-10 md:right-1/4 opacity-20 z-10 animate-float-slow ending-element"></div>
+
+        <div class="relative z-20 text-center text-white px-4">
+             <div class="glass-card px-12 py-8 rounded-full inline-block mb-8 relative overflow-hidden ending-card opacity-0 translate-y-20">
+                 <div class="absolute top-0 left-0 w-full h-full bg-gradient-to-r from-transparent via-white/20 to-transparent transform -skew-x-12 translate-x-[-150%] animate-[shimmer_3s_infinite]"></div>
+                 <h2 class="text-4xl md:text-6xl font-black font-kufi text-sky-900 relative z-10">تمت بحمد الله</h2>
+             </div>
+             <p class="text-xl md:text-2xl opacity-90 font-light mt-4 text-shadow font-kufi ending-text opacity-0 translate-y-10">كتاب الطهارة - باب المياه</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-sky-900 text-white text-center py-6 font-kufi text-sm relative z-20">
+        <p class="mb-2">&copy; 2025 <span class="font-montserrat font-bold mx-1">artgroup</span> All rights reserved.</p>
+        <div class="flex justify-center gap-6 mt-2 text-xs md:text-sm font-montserrat">
+            <button onclick="openModal('about')" class="hover:text-sky-300 transition-colors border-b border-transparent hover:border-sky-300">About Us</button>
+            <button onclick="openModal('terms')" class="hover:text-sky-300 transition-colors border-b border-transparent hover:border-sky-300">Terms & Privacy</button>
+        </div>
+    </footer>
+
+    <!-- MODALS -->
+    
+    <!-- About Us Modal -->
+    <div id="modal-about" class="modal-overlay">
+        <div class="modal-content glass-card p-10 md:p-16 rounded-3xl max-w-2xl w-[90%] text-center relative">
+            <button onclick="closeModal('about')" class="absolute top-4 right-4 text-gray-500 hover:text-red-500 text-2xl font-bold transition-colors" aria-label="Close About Us">&times;</button>
+            
+            <h2 class="text-3xl md:text-4xl font-bold text-sky-900 mb-6 font-montserrat">About Us</h2>
+            <div class="w-16 h-1 bg-sky-500 mx-auto mb-8 rounded-full"></div>
+            
+            <p class="text-lg md:text-xl text-gray-700 leading-relaxed font-kufi">
+                This website is a collaborative masterpiece.
+            </p>
+            <div class="mt-8 space-y-4">
+                <div class="bg-sky-50 p-4 rounded-xl border border-sky-100">
+                    <p class="text-sm text-gray-500 uppercase tracking-widest font-montserrat mb-1">Developed By</p>
+                    <p class="text-2xl font-bold text-sky-800 font-montserrat">artgroup</p>
+                </div>
+                <div class="bg-sky-50 p-4 rounded-xl border border-sky-100">
+                    <p class="text-sm text-gray-500 uppercase tracking-widest font-montserrat mb-1">In Collaboration With</p>
+                    <p class="text-2xl font-bold text-sky-800 font-kufi">Ahmad Zaelai</p>
+                </div>
+            </div>
+            
+            <p class="mt-8 text-gray-500 text-sm italic">"Combining technology with knowledge."</p>
+        </div>
+    </div>
+
+    <!-- Terms & Privacy Modal -->
+    <div id="modal-terms" class="modal-overlay">
+        <div class="modal-content bg-white p-10 md:p-16 rounded-3xl max-w-3xl w-[90%] h-[80vh] overflow-y-auto relative shadow-2xl">
+            <button onclick="closeModal('terms')" class="absolute top-6 right-6 text-gray-500 hover:text-red-500 text-3xl font-bold z-10 sticky top-0 float-right bg-white rounded-full w-10 h-10 flex items-center justify-center shadow-md transition-colors" aria-label="Close Terms">&times;</button>
+            
+            <h2 class="text-3xl font-bold text-slate-900 mb-8 font-montserrat border-b pb-4">Terms & Privacy Policy</h2>
+            
+            <div class="text-left space-y-6 text-gray-700 font-montserrat leading-relaxed text-sm md:text-base dir-ltr">
+                <h3 class="text-xl font-bold text-slate-800">1. Introduction</h3>
+                <p>Welcome to Fiqh of Water. By accessing this website, you agree to comply with these terms of service and our privacy policy.</p>
+                
+                <h3 class="text-xl font-bold text-slate-800">2. Intellectual Property</h3>
+                <p>The content, layout, design, data, databases and graphics on this website are protected by intellectual property laws. Content is created by artgroup and Ahmad Zaelai.</p>
+                
+                <h3 class="text-xl font-bold text-slate-800">3. Privacy Policy</h3>
+                <p>We respect your privacy. This website is a static landing page and does not collect personal data, use cookies for tracking, or store user information on servers. Any interaction (like scrolling or clicking) is processed locally on your device.</p>
+                
+                <h3 class="text-xl font-bold text-slate-800">4. Usage</h3>
+                <p>This website is intended for educational purposes regarding Islamic Jurisprudence (Fiqh). Users are free to read and share the knowledge presented.</p>
+                
+                <h3 class="text-xl font-bold text-slate-800">5. Contact</h3>
+                <p>For inquiries regarding the development or content, please contact the artgroup team.</p>
+            </div>
+            
+            <button onclick="closeModal('terms')" class="mt-10 bg-slate-900 text-white px-8 py-3 rounded-full hover:bg-slate-700 transition-colors w-full md:w-auto font-bold">Close</button>
+        </div>
+    </div>
+
+    <script>
+        // 1. Lenis Smooth Scroll Setup
+        // Wrapped in DOMContentLoaded to ensure scripts loaded
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof Lenis !== 'undefined') {
+                const lenis = new Lenis({
+                    duration: 1.2,
+                    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), 
+                    direction: 'vertical',
+                    gestureDirection: 'vertical',
+                    smooth: true,
+                    mouseMultiplier: 1,
+                    smoothTouch: false,
+                    touchMultiplier: 2,
+                });
+
+                function raf(time) {
+                    lenis.raf(time);
+                    requestAnimationFrame(raf);
+                }
+                requestAnimationFrame(raf);
+
+                if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+                    gsap.registerPlugin(ScrollTrigger);
+                }
+            } else {
+                console.warn('Lenis library not loaded.');
+            }
+
+            // 2. GSAP Animations
+            if (typeof gsap !== 'undefined') {
+                // Entrance
+                const tlHero = gsap.timeline({ defaults: { ease: "back.out(1.7)", duration: 1 } });
+                tlHero
+                    .from(".hero-element", { scale: 0, opacity: 0, stagger: 0.2, duration: 1.5, ease: "elastic.out(1, 0.5)" })
+                    .to(".hero-text", { y: 0, opacity: 1, stagger: 0.2 }, "-=1")
+                    .to(".hero-divider", { scaleX: 1, duration: 0.8, ease: "power2.out" }, "-=0.5");
+
+                // Scroll-Linked
+                gsap.utils.toArray('.section-panel').forEach((section) => {
+                    const bg = section.querySelector('.parallax-bg img');
+                    if (bg) {
+                        gsap.to(bg, {
+                            yPercent: 20, 
+                            ease: "none",
+                            scrollTrigger: {
+                                trigger: section,
+                                start: "top bottom", 
+                                end: "bottom top",
+                                scrub: true
+                            }
+                        });
+                    }
+                });
+
+                gsap.utils.toArray('.reveal-group').forEach((group) => {
+                    const children = group.querySelectorAll('.reveal-child');
+                    gsap.fromTo(children, 
+                        { y: 100, opacity: 0, scale: 0.95 },
+                        {
+                            y: 0, opacity: 1, scale: 1, duration: 1, stagger: 0.15, ease: "power3.out",
+                            scrollTrigger: {
+                                trigger: group,
+                                start: "top 80%", 
+                                toggleActions: "play none none reverse"
+                            }
+                        }
+                    );
+                });
+
+                // Lag Fix: Trigger earlier
+                const tlEnding = gsap.timeline({
+                    scrollTrigger: {
+                        trigger: "#section-ending",
+                        start: "top 60%", 
+                        toggleActions: "play none none reverse"
+                    }
+                });
+                tlEnding
+                    .to(".ending-element", { opacity: 0.3, stagger: 0.2, duration: 0.8 }) 
+                    .to(".ending-card", { y: 0, opacity: 1, duration: 0.8, ease: "back.out(1.2)" }, "-=0.6")
+                    .to(".ending-text", { y: 0, opacity: 0.9, duration: 0.8 }, "-=0.6");
+            }
+        });
+
+        // 3. Logo Logic
+        const logo = document.getElementById('brand-logo');
+        let isLogoVisible = true;
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) { 
+                if (isLogoVisible) {
+                    logo.classList.add('opacity-0');
+                    logo.style.pointerEvents = 'none'; // Disable click when hidden
+                    isLogoVisible = false;
+                }
+            } else {
+                if (window.scrollY < 10 && !isLogoVisible) {
+                    logo.classList.remove('opacity-0');
+                    logo.style.pointerEvents = 'auto'; // Re-enable click
+                    isLogoVisible = true;
+                }
+            }
+        });
+
+        document.body.addEventListener('click', (e) => {
+            if (e.target.closest('.modal-content') || e.target.closest('button')) return; 
+            if (window.getSelection().toString().length > 0) return;
+            
+            isLogoVisible = !isLogoVisible;
+            if (isLogoVisible) {
+                logo.classList.remove('opacity-0');
+                logo.style.pointerEvents = 'auto';
+            } else {
+                logo.classList.add('opacity-0');
+                logo.style.pointerEvents = 'none';
+            }
+        });
+
+        // 4. Modal Logic
+        function openModal(id) {
+            const modal = document.getElementById('modal-' + id);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden'; 
+            }
+        }
+
+        function closeModal(id) {
+            const modal = document.getElementById('modal-' + id);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = ''; 
+            }
+        }
+
+        document.querySelectorAll('.modal-overlay').forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
+
